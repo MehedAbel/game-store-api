@@ -1,0 +1,29 @@
+GET http://localhost:5049/games
+
+###
+GET http://localhost:5049/games/5
+
+###
+POST http://localhost:5049/games
+Content-Type: application/json
+
+{
+    "name": "Metin 2",
+    "genre": "MMORPG",
+    "price": 9999999,
+    "releaseDate": "2010-11-18"
+}
+
+###
+PUT http://localhost:5049/games/5
+Content-Type: application/json
+
+{
+    "name": "Metin 2",
+    "genre": "MMORPG",
+    "price": 20,
+    "releaseDate": "2010-11-25"
+}
+
+###
+DELETE http://localhost:5049/games/5

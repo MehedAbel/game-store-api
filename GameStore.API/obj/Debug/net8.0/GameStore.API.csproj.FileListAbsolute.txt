@@ -23,3 +23,4 @@ D:\Programare\CSharp\GameStore\GameStore.API\obj\Debug\net8.0\refint\GameStore.A
 D:\Programare\CSharp\GameStore\GameStore.API\obj\Debug\net8.0\GameStore.API.pdb
 D:\Programare\CSharp\GameStore\GameStore.API\obj\Debug\net8.0\GameStore.API.genruntimeconfig.cache
 D:\Programare\CSharp\GameStore\GameStore.API\obj\Debug\net8.0\ref\GameStore.API.dll
+d:\Programare\CSharp\GameStore\GameStore.API\obj\Debug\net8.0\GameStore.API.sourcelink.json
