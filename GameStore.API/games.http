@@ -10,7 +10,7 @@ Content-Type: application/json
 {
     "name": "Metin 2",
     "genre": "MMORPG",
-    "price": 9999999,
+    "price": 100,
     "releaseDate": "2010-11-18"
 }
 
