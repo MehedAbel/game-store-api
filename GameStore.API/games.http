@@ -1,16 +1,16 @@
 GET http://localhost:5049/games
 
 ###
-GET http://localhost:5049/games/5
+GET http://localhost:5049/games/1
 
 ###
 POST http://localhost:5049/games
 Content-Type: application/json
 
 {
-    "name": "League Of Legends",
-    "genreId": "5",
-    "price": 1,
+    "name": "Dragon Ball Fighter",
+    "genreId": "2",
+    "price": 10,
     "releaseDate": "2009-05-28"
 }
 

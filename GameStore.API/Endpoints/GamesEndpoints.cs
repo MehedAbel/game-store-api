@@ -3,6 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 using GameStore.API.Data;
 using GameStore.API.DTOs;
 using GameStore.API.Entities;
+using GameStore.API.Mapping;
 
 namespace GameStore.API.Endpoints;
 
@@ -10,7 +11,7 @@ public static class GamesEndpoints
 {
     const string getGameEndpointName = "GetGame";
 
-    private static readonly List<GameDTO> games = [
+    private static readonly List<GameSummaryDTO> games = [
         new (
             1,
             "Skyrim",
@@ -49,35 +50,21 @@ public static class GamesEndpoints
         group.MapGet("/", () => games);
 
         // GET /games/1
-        group.MapGet("/{id}", (int id) => {
-            var game = games.Find(game => game.Id == id);
+        group.MapGet("/{id}", (int id, GameStoreContext dbContext) => {
+            Game? game = dbContext.Games.Find(id);
 
-            return game is null ? Results.NotFound() : Results.Ok(game);
+            return game is null ? Results.NotFound() : Results.Ok(game.ToGameDetailsDTO());
         })
         .WithName(getGameEndpointName);
 
         // POST /games
         group.MapPost("/", (CreateGameDTO newGame, GameStoreContext dbContext) => {
-            Game game = new () {
-                Name = newGame.Name,
-                Genre = dbContext.Genres.Find(newGame.GenreId),
-                GenreId = newGame.GenreId,
-                Price = newGame.Price,
-                ReleaseDate = newGame.ReleaseDate
-            };
-
-            GameDTO gameDTO = new (
-                game.Id,
-                game.Name,
-                game.Genre!.Name,
-                game.Price,
-                game.ReleaseDate
-            );
-
+            Game game = newGame.ToEntity();
+            
             dbContext.Games.Add(game);
             dbContext.SaveChanges();
 
-            return Results.CreatedAtRoute(getGameEndpointName, new { id = game.Id }, gameDTO);
+            return Results.CreatedAtRoute(getGameEndpointName, new { id = game.Id }, game.ToGameDetailsDTO());
         });
 
         // PUT /games/1
@@ -88,7 +75,7 @@ public static class GamesEndpoints
                 return Results.NotFound();
             }
 
-            games[index] = new GameDTO(
+            games[index] = new GameSummaryDTO(
                 id,
                 updatedGame.Name,
                 updatedGame.Genre,
