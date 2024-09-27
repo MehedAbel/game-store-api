@@ -8,10 +8,10 @@ POST http://localhost:5049/games
 Content-Type: application/json
 
 {
-    "name": "Metin 2",
-    "genre": "MMORPG",
-    "price": 100,
-    "releaseDate": "2010-11-18"
+    "name": "League Of Legends",
+    "genreId": "5",
+    "price": 1,
+    "releaseDate": "2009-05-28"
 }
 
 ###
